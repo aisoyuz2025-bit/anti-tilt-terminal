@@ -7,7 +7,7 @@
   var I18N = {
     ru: {
       title: 'Терминал защиты депозита', subtitle: 'Анти-Тильт · калькулятор сделок',
-      linkTg: 'Telegram-канал', linkApex: 'Платформа APEX', linkCalc: 'Калькулятор дохода',
+      linkTg: 'Telegram-канал', linkApex: 'Платформа APEX',
       balanceLabel: 'Твой рабочий баланс ($)', minTrade: 'Минимальная сделка — строго $1.00',
       fixaName: 'Фикса', fixaTag: 'Доступна всегда',
       fixaHelp: 'Самый безопасный старт. Вы всегда ставите одну и ту же сумму (например, $1). Идеально для привыкания к системе без риска.',
@@ -47,7 +47,7 @@
     },
     en: {
       title: 'Deposit Protection Terminal', subtitle: 'Anti-Tilt · trade calculator',
-      linkTg: 'Telegram channel', linkApex: 'APEX platform', linkCalc: 'Profit calculator',
+      linkTg: 'Telegram channel', linkApex: 'APEX platform',
       balanceLabel: 'Your working balance ($)', minTrade: 'Minimum trade — strictly $1.00',
       fixaName: 'Fixed', fixaTag: 'Always available',
       fixaHelp: 'The safest start. You always trade the same amount (for example, $1). Perfect for getting used to the system without risk.',
