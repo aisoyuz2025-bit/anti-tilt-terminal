@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Терминал защиты депозита — Анти-Тильт</title>
+<meta name="description" content="Простой калькулятор сделок и защита депозита от эмоциональной торговли: Фикса, Мартингейл, Анти-Мартингейл.">
+<meta name="theme-color" content="#0A0D12">
+<meta name="color-scheme" content="dark light">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Анти-Тильт">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="./icons/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="bg-glow" aria-hidden="true"></div>
+<div class="flash" id="flash" aria-hidden="true"></div>
+
+<header class="top wrap">
+  <div class="brand">
+    <img src="./icons/icon.svg" alt="" class="logo" width="36" height="36">
+    <div>
+      <h1 data-i18n="title">Терминал защиты депозита</h1>
+      <div class="sub" data-i18n="subtitle">Анти-Тильт · калькулятор сделок</div>
+    </div>
+  </div>
+  <div class="toggles">
+    <button class="chip" id="langBtn" type="button" aria-label="Language">EN</button>
+    <button class="chip icon" id="themeBtn" type="button" aria-label="Тема">☀️</button>
+  </div>
+</header>
+
+<nav class="links wrap" aria-label="Ссылки">
+  <a class="link" href="https://t.me/+S9Fucx4xaQBhMzcy" target="_blank" rel="noopener"><span data-i18n="linkTg">Telegram-канал</span> ↗</a>
+  <a class="link" href="https://t.me/ApexBinaryRobot?start=telegram" target="_blank" rel="noopener"><span data-i18n="linkApex">Платформа APEX</span> ↗</a>
+  <a class="link" href="https://green-frost-apple-cloud.grok.me" target="_blank" rel="noopener"><span data-i18n="linkCalc">Калькулятор дохода</span> ↗</a>
+</nav>
+
+<main class="wrap">
+  <section class="card balance">
+    <label for="balance" class="label" data-i18n="balanceLabel">Твой рабочий баланс ($)</label>
+    <div class="money-input">
+      <span>$</span>
+      <input id="balance" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" value="50" aria-describedby="balanceMsg">
+    </div>
+    <div class="quick" id="quick">
+      <button type="button" data-v="15">$15</button>
+      <button type="button" data-v="30">$30</button>
+      <button type="button" data-v="50">$50</button>
+      <button type="button" data-v="100">$100</button>
+      <button type="button" data-v="500">$500</button>
+      <button type="button" data-v="1000">$1000</button>
+      <button type="button" data-v="3000">$3000</button>
+    </div>
+    <p class="msg" id="balanceMsg" role="status"></p>
+    <p class="hint" data-i18n="minTrade">Минимальная сделка — строго $1.00</p>
+  </section>
+
+  <section class="modes" id="modes" role="radiogroup" aria-label="Режим">
+    <div class="mode" data-mode="fixa" role="radio" tabindex="0">
+      <div class="mode-head">
+        <span class="mode-name" data-i18n="fixaName">Фикса</span>
+        <button class="q" type="button" data-q="fixa" aria-label="?">?</button>
+      </div>
+      <div class="mode-tag" data-i18n="fixaTag">Доступна всегда</div>
+      <p class="explain" data-i18n="fixaHelp">Самый безопасный старт. Вы всегда ставите одну и ту же сумму (например, $1). Идеально для привыкания к системе без риска.</p>
+    </div>
+    <div class="mode" data-mode="marti" role="radio" tabindex="0">
+      <div class="mode-head">
+        <span class="mode-name" data-i18n="martiName">Мартингейл (Умное перекрытие)</span>
+        <span class="lock" aria-hidden="true">🔒</span>
+        <button class="q" type="button" data-q="marti" aria-label="?">?</button>
+      </div>
+      <div class="mode-tag" data-i18n="from50">От $50</div>
+      <p class="explain" data-i18n="martiHelp">Система перекрытия минусов. Если прогноз не зашел, следующая сумма чуть увеличивается, чтобы вернуть потерю и дать плюс. Терминал сам считает, сколько шагов выдержит ваш баланс.</p>
+    </div>
+    <div class="mode" data-mode="anti" role="radio" tabindex="0">
+      <div class="mode-head">
+        <span class="mode-name" data-i18n="antiName">Анти-Мартингейл (Разгон)</span>
+        <span class="lock" aria-hidden="true">🔒</span>
+        <button class="q" type="button" data-q="anti" aria-label="?">?</button>
+      </div>
+      <div class="mode-tag" data-i18n="from50">От $50</div>
+      <p class="explain" data-i18n="antiHelp">Охота за серией плюсов. Рискуете только стартовым $1, а дальше разгоняете полученную прибыль.</p>
+    </div>
+  </section>
+
+  <section class="card result" id="result" aria-live="polite"></section>
+
+  <footer class="disclaimer" data-i18n="disclaimer">Это только калькулятор. Не является финансовой рекомендацией. Торговля связана с риском потери всего депозита.</footer>
+</main>
+
+<section class="tilt" id="tilt" aria-label="Анти-Тильт">
+  <div class="wrap tilt-in">
+    <div class="tilt-stats">
+      <div><b id="wins">0</b><span data-i18n="statWins">Плюс</span></div>
+      <div><b id="losses">0</b><span data-i18n="statLosses">Минус</span></div>
+      <div><b id="streak">0/3</b><span data-i18n="statStreak">Минусов подряд</span></div>
+      <button class="reset" id="resetBtn" type="button" data-i18n="reset">Сброс</button>
+    </div>
+    <div class="next" id="next"></div>
+    <div class="tilt-btns" id="tiltBtns">
+      <button class="btn plus" id="plusBtn" type="button" data-i18n="plus">[+] Плюс</button>
+      <button class="btn minus" id="minusBtn" type="button" data-i18n="minus">[−] Минус</button>
+    </div>
+    <div class="stop" id="stop" role="alert" hidden>
+      <div class="stop-title" data-i18n="stopText">🔴 СТОП-ТОРГИ. Система защиты активирована. Закрой платформу до завтра, чтобы сохранить деньги</div>
+      <div class="stop-sub" id="stopSub"></div>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="assertive"></div>
+
+<script src="./math.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
